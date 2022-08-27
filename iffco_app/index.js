@@ -36,3 +36,30 @@ const port = 8080;
 app.listen(port, () =>{
   console.log(`Server started on port: ${port}`);
 });
+
+var request = require('request');
+
+var options = {
+  'method': 'POST',
+  'url': 'https://graph.facebook.com/v13.0/104592059045673/messages',
+  'headers': {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer EAAIldmAOd9ABADFBUVyHzLW4J6e1fdUSNp4G25RpPhv4mTRT600ryzACi2S0NuyxJ4Qvopr4hlj1MnnZAR32uG1dJgrdYHFTvUxl3uVnEqUYoLMFKWknKZCbd4gfmTlB4Atz2xd0DpsR5PhTGV8hFrwvOsXd5ZCZB4FikgAQSYHbXpPRCah4ZCyPqyKvgtoHNlHt6wrCztQZDZD'
+  },
+  body: JSON.stringify({
+    "messaging_product": "whatsapp",
+    "to": "919340146989",
+    "type": "template",
+    "template": {
+      "name": "hello_world",
+      "language": {
+        "code": "en_US"
+      }
+    }
+  })
+
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
